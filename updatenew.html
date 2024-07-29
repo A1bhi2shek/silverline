@@ -1,0 +1,65 @@
+<html> 
+ 
+<body> 
+    <div> 
+	<p>
+<?php  
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "firstdatabase";
+$N=$_POST["Names"];
+$P=$_POST["Password"];
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * from silverline where Names='$N' and password='$P'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) 
+{
+    echo "
+	<body bgcolor='sky blue'>
+	<p align=Center>
+	<table width=90% height= 90% border=2>
+	<tr height= 20%>
+	<td align=Center colspan=7>
+	<img src=SCI.png height=20% width=100%></TD>
+	</tr>
+	<tr>
+	<td>
+	<table colspan=2 height=60% width=40% align=center border=2>
+	<tr>
+	<td align=center colspan=2>Fill the Details</td>
+	</tr>
+	<tr>
+	<td>Enter new Password</td><td><input type=text name=N1></td>
+	</tr>
+	<tr>
+	<td>Confirm the Password</td><td><input type=text name=N2></td>
+	</tr>
+	<tr>
+	<td><input type=submit value='change password'</td>
+	</tr>
+	</table>
+	</td>
+	</tr>
+	</table>
+	</body>";
+} 
+}
+else {
+  echo "Kindly enter the correct User Name or Password";
+}
+echo "Study " . $_GET['N1'] . " at " . $_GET['N2'];
+	$conn->close();
+
+?></p>
+</body> 
+</html>
